@@ -1,10 +1,4 @@
-﻿namespace DrinksInfo
-{
-    internal class Program
-    {
-        static void Main(string[] args)
-        {
-            Console.WriteLine("Hello, World!");
-        }
-    }
-}
+﻿using DrinksInfo;
+
+UserInput userInput = new UserInput();
+await userInput.GetCategoriesInput();
