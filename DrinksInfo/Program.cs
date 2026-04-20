@@ -1,4 +1,4 @@
 ﻿using DrinksInfo;
 
-UserInput userInput = new UserInput();
+UserInterface userInput = new UserInterface();
 await userInput.GetCategoriesInput();
