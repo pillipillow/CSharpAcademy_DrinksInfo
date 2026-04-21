@@ -26,6 +26,19 @@ namespace DrinksInfo
                 Console.WriteLine("Choose a category by typing their name: ");
                 string category = Console.ReadLine();
 
+                while (!Validator.IsStringValid(category))
+                {
+                    Console.WriteLine("\nInvalid category");
+                    category = Console.ReadLine();
+                }
+
+                if (!categories.Any(x => x.strCategory == category))
+                {
+                    Console.WriteLine("Category doesn't exists.");
+                    Console.ReadLine();
+                    await GetCategoriesInput();
+                }
+
                 await GetDrinksInput(category);
             }
         }
@@ -49,6 +62,21 @@ namespace DrinksInfo
 
                 Console.WriteLine("Choose a drink by typing their id: ");
                 string drink = Console.ReadLine();
+
+                if (drink == "0") await GetCategoriesInput();
+
+                while (!Validator.IsIdValid(drink))
+                {
+                    Console.WriteLine("\nInvalid drink");
+                    drink = Console.ReadLine();
+                }
+
+                if (!drinks.Any(x => x.idDrink == drink))
+                {
+                    Console.WriteLine("Drink doesn't exists");
+                    Console.ReadLine();
+                    await GetDrinksInput(category);
+                }
 
                 await GetDrinkDetailInput(drink);
             }
