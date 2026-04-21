@@ -1,4 +1,5 @@
 ﻿using DrinksInfo.Models;
+using Spectre.Console;
 
 namespace DrinksInfo
 {
@@ -18,10 +19,13 @@ namespace DrinksInfo
             }
             else
             {
+                var table = new Table().HideHeaders();
+                table.AddColumn("Categories");
                 foreach (var c in categories)
                 {
-                    Console.WriteLine($"- {c.strCategory}");
+                    table.AddRow(c.strCategory);
                 }
+                AnsiConsole.Write(table);
 
                 Console.WriteLine("Choose a category by typing their name: ");
                 string category = Console.ReadLine();
@@ -46,8 +50,6 @@ namespace DrinksInfo
         internal async Task GetDrinksInput(string category)
         {
             Console.Clear();
-            Console.WriteLine($"---{category.ToUpper()}---");
-
             var drinks = await drinkService.GetDrinksByCategory(category);
             if (drinks.Count <= 0)
             {
@@ -55,10 +57,14 @@ namespace DrinksInfo
             }
             else
             {
+                var table = new Table().Title($"---{category.ToUpper()}---");
+                table.AddColumn("ID");
+                table.AddColumn("Drink");
                 foreach (var d in drinks)
                 {
-                    Console.WriteLine($"{d.idDrink}\t{d.strDrink}");
+                    table.AddRow(d.idDrink, d.strDrink);
                 }
+                AnsiConsole.Write(table);
 
                 Console.WriteLine("Choose a drink by typing their id: ");
                 string drink = Console.ReadLine();
@@ -94,11 +100,15 @@ namespace DrinksInfo
             {
                 DrinkDetail drinkDetail = drinkList[0];
 
+                var table = new Table().HideHeaders().ShowRowSeparators();
+                table.AddColumn("Key");
+                table.AddColumn("Value");
+
                 foreach (var detail in drinkDetail.GetDrinkDetails())
                 { 
-                    Console.WriteLine(detail.Key + ": " + detail.Value);
+                    table.AddRow(detail.Key, detail.Value);
                 }
-
+                AnsiConsole.Write(table);
 
                 Console.WriteLine("\nPress Enter to return back to the categories menu");
                 Console.ReadLine();
