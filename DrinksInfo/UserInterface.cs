@@ -1,4 +1,6 @@
-﻿namespace DrinksInfo
+﻿using DrinksInfo.Models;
+
+namespace DrinksInfo
 {
     internal class UserInterface
     {
@@ -51,5 +53,31 @@
                 await GetDrinkDetailInput(drink);
             }
         }
+
+        internal async Task GetDrinkDetailInput(string drink)
+        {
+            Console.Clear();
+            var drinkList = await drinkService.GetDrink(drink);
+            if (drinkList.Count <= 0)
+            {
+                Console.WriteLine("No drink found");
+            }
+            else
+            {
+                DrinkDetail drinkDetail = drinkList[0];
+
+                foreach (var detail in drinkDetail.GetDrinkDetails())
+                { 
+                    Console.WriteLine(detail.Key + ": " + detail.Value);
+                }
+
+
+                Console.WriteLine("\nPress Enter to return back to the categories menu");
+                Console.ReadLine();
+                await GetCategoriesInput();
+            }
+
+        }
+
     }
 }

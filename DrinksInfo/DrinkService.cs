@@ -57,5 +57,28 @@ namespace DrinksInfo
             return drinks;
 
         }
+
+        internal async Task<List<DrinkDetail>> GetDrink(string drink)
+        {
+            List<DrinkDetail> returnedList = new List<DrinkDetail>();
+
+            try
+            {
+                var response = await client.GetAsync($"lookup.php?i={drink}");
+
+                response.EnsureSuccessStatusCode();
+
+                var rawResponse = await response.Content.ReadAsStringAsync();
+
+                var serialize = JsonConvert.DeserializeObject<DrinkDetailObject>(rawResponse);
+                returnedList = serialize.drinkDetailList;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"An unexpected error occured: {ex.Message}");
+            }
+
+            return returnedList;
+        }
     }
 }
