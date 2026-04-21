@@ -13,28 +13,46 @@ namespace DrinksInfo
 
         internal async Task<List<Category>> GetCategories()
         {
-            var response = await client.GetAsync("list.php?c=list");
+            List<Category> categories = new List<Category>();
 
-            response.EnsureSuccessStatusCode();
+            try
+            {
+                var response = await client.GetAsync("list.php?c=list");
 
-            var rawResponse = await response.Content.ReadAsStringAsync();
+                response.EnsureSuccessStatusCode();
 
-            var serialize = JsonConvert.DeserializeObject<Categories>(rawResponse);
-            List<Category> categories = serialize.categoriesList;
+                var rawResponse = await response.Content.ReadAsStringAsync();
+
+                var serialize = JsonConvert.DeserializeObject<Categories>(rawResponse);
+                categories = serialize.categoriesList;
+            }
+            catch (Exception ex)
+            { 
+                Console.WriteLine($"An unexpected error occured: {ex.Message}");
+            }
 
             return categories; 
         }
 
         internal async Task<List<Drink>> GetDrinksByCategory(string category)
-        { 
-            var response = await client.GetAsync($"filter.php?c={HttpUtility.UrlEncode(category)}");
+        {
+            List<Drink> drinks = new List<Drink>();
 
-            response.EnsureSuccessStatusCode();
+            try
+            {
+                var response = await client.GetAsync($"filter.php?c={HttpUtility.UrlEncode(category)}");
 
-            var rawResponse = await response.Content.ReadAsStringAsync();
+                response.EnsureSuccessStatusCode();
 
-            var serialize = JsonConvert.DeserializeObject<Drinks>(rawResponse);
-            List<Drink> drinks = serialize.drinksList;
+                var rawResponse = await response.Content.ReadAsStringAsync();
+
+                var serialize = JsonConvert.DeserializeObject<Drinks>(rawResponse);
+                drinks = serialize.drinksList;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"An unexpected error occured: {ex.Message}");
+            }
 
             return drinks;
 
