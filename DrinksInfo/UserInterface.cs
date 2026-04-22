@@ -110,6 +110,8 @@ namespace DrinksInfo
                 }
                 AnsiConsole.Write(table);
 
+                await drinkService.GetImage(drinkDetail.strDrinkThumb);
+
                 Console.WriteLine("\nPress Enter to return back to the categories menu");
                 Console.ReadLine();
                 await GetCategoriesInput();

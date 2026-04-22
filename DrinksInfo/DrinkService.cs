@@ -1,5 +1,6 @@
 ﻿using DrinksInfo.Models;
 using Newtonsoft.Json;
+using Spectre.Console;
 using System.Web;
 
 namespace DrinksInfo
@@ -79,6 +80,18 @@ namespace DrinksInfo
             }
 
             return returnedList;
+        }
+
+        internal async Task GetImage(string url)
+        {
+            byte[] imageBytes = await client.GetByteArrayAsync(new Uri(url));
+            
+            using var memoryStream = new MemoryStream(imageBytes);
+
+            var image = new CanvasImage(memoryStream);
+            image.MaxWidth(30);
+            image.BilinearResampler();
+            AnsiConsole.Write(image);
         }
     }
 }
