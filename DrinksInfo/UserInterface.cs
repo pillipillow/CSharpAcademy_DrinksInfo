@@ -15,7 +15,7 @@ namespace DrinksInfo
             var categories = await drinkService.GetCategories();
             if (categories.Count <= 0)
             {
-                Console.WriteLine("No categories found. Press enter to exit");
+                Console.WriteLine("No categories found. Press enter to exit.");
                 Console.ReadLine();
             }
             else
@@ -54,8 +54,9 @@ namespace DrinksInfo
             var drinks = await drinkService.GetDrinksByCategory(category);
             if (drinks.Count <= 0)
             {
-                Console.WriteLine("No drinks found");
+                Console.WriteLine("No drinks found. Press enter to go back to the category menu.");
                 Console.ReadLine();
+                await GetCategoriesInput();
             }
             else
             {
@@ -68,7 +69,7 @@ namespace DrinksInfo
                 }
                 AnsiConsole.Write(table);
 
-                Console.WriteLine("Choose a drink by typing their id: ");
+                Console.WriteLine("Choose a drink by typing their id (Type 0 to go back to the category menu): ");
                 string drink = Console.ReadLine();
 
                 if (drink == "0") await GetCategoriesInput();
@@ -86,18 +87,19 @@ namespace DrinksInfo
                     await GetDrinksInput(category);
                 }
 
-                await GetDrinkDetailInput(drink);
+                await GetDrinkDetailInput(drink, category);
             }
         }
 
-        internal async Task GetDrinkDetailInput(string drink)
+        internal async Task GetDrinkDetailInput(string drink, string category)
         {
             Console.Clear();
             var drinkList = await drinkService.GetDrink(drink);
             if (drinkList.Count <= 0)
             {
-                Console.WriteLine("No drink found");
+                Console.WriteLine("No drink found. Press enter to go back to the drinks menu.");
                 Console.ReadLine();
+                await GetDrinksInput(category);
             }
             else
             {
