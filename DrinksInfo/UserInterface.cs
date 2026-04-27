@@ -15,7 +15,8 @@ namespace DrinksInfo
             var categories = await drinkService.GetCategories();
             if (categories.Count <= 0)
             {
-                Console.WriteLine("No categories found.");
+                Console.WriteLine("No categories found. Press enter to exit");
+                Console.ReadLine();
             }
             else
             {
@@ -54,6 +55,7 @@ namespace DrinksInfo
             if (drinks.Count <= 0)
             {
                 Console.WriteLine("No drinks found");
+                Console.ReadLine();
             }
             else
             {
@@ -95,6 +97,7 @@ namespace DrinksInfo
             if (drinkList.Count <= 0)
             {
                 Console.WriteLine("No drink found");
+                Console.ReadLine();
             }
             else
             {

@@ -84,14 +84,21 @@ namespace DrinksInfo
 
         internal async Task GetImage(string url)
         {
-            byte[] imageBytes = await client.GetByteArrayAsync(new Uri(url));
-            
-            using var memoryStream = new MemoryStream(imageBytes);
+            try
+            {
+                byte[] imageBytes = await client.GetByteArrayAsync(new Uri(url));
 
-            var image = new CanvasImage(memoryStream);
-            image.MaxWidth(30);
-            image.BilinearResampler();
-            AnsiConsole.Write(image);
+                using var memoryStream = new MemoryStream(imageBytes);
+
+                var image = new CanvasImage(memoryStream);
+                image.MaxWidth(30);
+                image.BilinearResampler();
+                AnsiConsole.Write(image);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Image couldn't be rendered: {ex.Message}");
+            }
         }
     }
 }
