@@ -15,7 +15,7 @@ Drinks Info app is the second olive green belt project from the C# Academy. This
 ![Image](Assets/1.png)
 - Drink information will leave out the empty values and laid out in a table. Table layout uses Spectre.Console.
 ![Image](Assets/3.png)
-- Image display at the end of the table. Uses the Spectre.Console.ImageSharp component.
+- Image display at the end of the table. Uses the Spectre.Console CanvasImage widget.
 ![Image](Assets/4.png)
 
 ## Challenges
