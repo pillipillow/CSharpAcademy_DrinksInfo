@@ -14,13 +14,16 @@ Drinks Info app is the second olive green belt project from the C# Academy. This
 
 ![Image](Assets/1.png)
 - Drink information will leave out the empty values and laid out in a table. Table layout uses Spectre.Console.
+
 ![Image](Assets/3.png)
 - Image display at the end of the table. Uses the Spectre.Console CanvasImage widget.
+
 ![Image](Assets/4.png)
 
 ## Challenges
 - The tutorial uses RestSharp to get the API databases. For the challenge, I try to use the HTTP Client from the beginning instead. Unfortunately I had to use Google Gemini to explain the HTTP Client fundamentals. From what I understood, first thing to do is to set up the base address to the HTTP Client.
 ![Image](Assets/5.png)
+
 Once that's done, the first part is to combine the base address with the uri to send a get request. Second part is to check if the response is successful. If it is sucessful, the response is then read as a string, and since the raw response is JSON layout, I use newtonsoft.json deserialization to convert into a model similar to the video tutorial. 
 ![Image](Assets/6.png)
 
