@@ -11,6 +11,7 @@ Drinks Info app is the second olive green belt project from the C# Academy. This
 ## Features
 - Uses a Web API database pulled from "http://www.thecocktaildb.com/api/json/v1/1/" using HTTP Client.
 - User chooses the category of drink in the beginning, then choose their drink for details. Table layout uses Spectre.Console. 
+
 ![Image](Assets/1.png)
 - Drink information will leave out the empty values and laid out in a table. Table layout uses Spectre.Console.
 ![Image](Assets/3.png)
